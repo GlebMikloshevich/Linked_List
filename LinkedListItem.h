@@ -7,9 +7,10 @@
 
 template <class Type> class LinkedListItem {
      Type data;
-     LinkedListItem* next;
+
 
     public:
+        LinkedListItem* next;
         LinkedListItem(const Type&  adata, LinkedListItem* anext);
         const Type& getData() const;
         LinkedListItem* getNext();

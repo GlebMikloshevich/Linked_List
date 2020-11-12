@@ -13,10 +13,12 @@ template <class Type> class LinkedList {
 
     public:
 
-    LinkedListItem <Type>* start;
+        LinkedListItem <Type>* start;
+        LinkedListItem <Type>* end;
         LinkedList();
         ~LinkedList();
         LinkedListItem<Type>* getStart();
+        LinkedListItem<Type>* getEnd();
         void deleteFirst();
         void deleteAfter(LinkedListItem<Type>* ptr);
         void insertFirst(const Type& data);

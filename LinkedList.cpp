@@ -7,21 +7,26 @@
 template <class Type>
 LinkedList <Type>::LinkedList() {
     start = 0;
+    end = 0;
 }
 
 template <class Type>
 LinkedList <Type>::~LinkedList<Type>() {
-    while (start)
+    while (start->getNext() != start)
         deleteFirst();
+    deleteFirst();
+
 }
 
 template <class Type>
 void LinkedList<Type>::insertFirst(const Type &data) {
     LinkedListItem <Type>* second = start;
-    if (start == 0)
-        second->next = second->getNext();
     start = new LinkedListItem<Type>(data, second);
-
+    if (start->getNext()==0){
+        start->next = start;
+        end = start;
+    }
+    end->next = start;
 }
 
 template <class Type>
@@ -46,19 +51,30 @@ std::ostream& operator <<(std::ostream& out, LinkedList<T>& list){
     LinkedListItem<T>* ptr = list.start;
     if (!ptr)
         out<<"EMPTY ";
-    else while (ptr ) {
-        out<< ptr-> getData()<<' ';
-        ptr = ptr -> getNext();
+    else {
+        while (ptr != list.getEnd()) {
+            out<< ptr-> getData()<<' ';
+            ptr = ptr -> getNext();
+        }
+        out<<list.getEnd()->getData();
     }
+    //out<<"test";
     return out;
 }
 
 template <class Type>
 void LinkedList<Type>::deleteFirst() {
     if (start) {
-        LinkedListItem<Type>* temp = start -> next;
-        delete start;
-        start = temp;
+        if (start->getNext() == start){
+            delete start;
+            start = 0;
+            end = 0;
+        } else {
+            LinkedListItem<Type>* temp = start -> next;
+            delete start;
+            start = temp;
+            end->next = start;
+        }
     } else {
         throw LinkedListException();
     }
@@ -67,4 +83,9 @@ void LinkedList<Type>::deleteFirst() {
 template <class Type>
 LinkedListItem<Type>* LinkedList<Type>::getStart() {
     return start;
+}
+
+template <class Type>
+LinkedListItem<Type>* LinkedList<Type>::getEnd() {
+    return end;
 }
