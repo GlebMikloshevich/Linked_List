@@ -21,4 +21,9 @@ const Type& LinkedListItem<Type>::getData() const {
 }
 
 
+template <class Type>
+void LinkedListItem<Type>::setNext(LinkedListItem<Type>* anext){
+    this->next = anext;
+}
+
 

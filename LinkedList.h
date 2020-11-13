@@ -10,11 +10,11 @@ class LinkedListException{};
 template <class Type> class LinkedList {
     LinkedList(const LinkedList& list);
     LinkedList& operator =(const LinkedList& list);
+    LinkedListItem <Type>* start;
+    LinkedListItem <Type>* end;
 
     public:
 
-        LinkedListItem <Type>* start;
-        LinkedListItem <Type>* end;
         LinkedList();
         ~LinkedList();
         LinkedListItem<Type>* getStart();
